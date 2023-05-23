@@ -35,19 +35,23 @@ python create_folds.py --num_folds 2 --dataset_path /work/yinghork/socialiq_data
         - Edit similarity_grid.yml file given the "TODO"
         - Run: ```wandb sweep similarity_grid.yml```
         - Run sbatch with the wandb agent command
+    - Run the dissimilarity model sweep:
+        - Edit dissimilarity_grid.yml file given the "TODO"
+        - Run: ```wandb sweep dissimilarity_grid.yml```
+        - Run sbatch with the wandb agent command
     - Run the matching sweep: 
-        - Edit matching_grid.yml file
-        - Run: ```wandb sweep matching_grid.yml```
+        - Edit multi_matching_grid.yml file
+        - Run: ```wandb sweep multi_matching_grid.yml```
         - Run sbatch with the wandb agent command
     - Combine the folds: 
-        - ```python combine_folds.py --num_folds 1 --dataset_path /work/yinghork/socialiq_data/matchings/train --output_dir /work/yinghork/socialiq_data/matchings/train```
+        - ```python combine_folds.py --num_folds 16 --lam 0.1,0.5,1.0,2.0 --lam2 0.1,0.5,1.0,2.0 --lam3 0.1,0.5,1.0,2.0 --dataset_path /work/yinghork/socialiq_data/matchings/train --output_dir /work/yinghork/socialiq_data/matchings/train```
 
 ### 3. How to retrain relevance model on new matchings: 
 - For each of the train and validation data: 
     - Get the matching data into the roberta format that the model reads (two files: 1 train file and 1 validation file, and both have to be in the same folder):
 ```
-python matchings_to_roberta.py --type train --lam 0.1 --dataset_path /work/yinghork/socialiq_data/matchings/train --output_dir /work/yinghork/socialiq_data/matchings/lam0.1
-python matchings_to_roberta.py --type valid --lam 0.1 --dataset_path /work/yinghork/socialiq_data/matchings/valid --output_dir /work/yinghork/socialiq_data/matchings/lam0.1
+python matchings_to_roberta.py --type train --lam 0.1 --lam2 0.1 --lam3 0.1 --dataset_path /work/yinghork/socialiq_data/matchings/train --output_dir /work/yinghork/socialiq_data/matchings/lam0.1
+python matchings_to_roberta.py --type valid --lam 0.1 --lam2 0.1 --lam3 0.1 --dataset_path /work/yinghork/socialiq_data/matchings/valid --output_dir /work/yinghork/socialiq_data/matchings/lam0.1
 ```
 - Run the following command with updated dataset paths and output directory: 
 ```
@@ -56,6 +60,6 @@ python train_roberta_multiple_choice.py --dataset_path /work/yinghork/socialiq_d
 
 ### 4. Get new matchings back in siq form for Merlot:
 ```
-python matchings_to_siq.py --type train --lam 0.0 --dataset_path /work/yinghork/socialiq_data/matchings/train --output_dir /work/yinghork/socialiq_data
+python matchings_to_siq.py --lam 0.1,0.5,1.0,2.0 --lam2 0.1,0.5,1.0,2.0 --lam3 0.1,0.5,1.0,2.0 --dataset_path /work/yinghork/socialiq_data/matchings/train --output_dir /work/yinghork/socialiq_data
 ```
 
