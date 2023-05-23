@@ -2,7 +2,7 @@
 
 
 ### 1. How to train relevance model (given the base SIQ data): 
-- Your train + validation file must be named siq_train2.jsonl and siq_val2.jsonl, respectively
+- Your train + validation + test file must be named qa_train.json and qa_val.json and qa_test.json, respectively
 - Run the following command to get the train + validation file into the RoBERTa format that the model reads:
 
 ```
