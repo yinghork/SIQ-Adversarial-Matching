@@ -33,8 +33,9 @@ args = setup_args()
 # get original SIQ data 
 
 dataset_path = args.dataset_path
-df_train = pd.read_json(os.path.join(dataset_path, 'siq_train2.jsonl'),lines=True)
-df_valid = pd.read_json(os.path.join(dataset_path, 'siq_val2.jsonl'),lines=True)
+df_train = pd.read_json(os.path.join(dataset_path, 'qa_train.json'),lines=True)
+df_valid = pd.read_json(os.path.join(dataset_path, 'qa_val.json'),lines=True)
+df_test = pd.read_json(os.path.join(dataset_path, 'qa_test.json'),lines=True)
 
 # clean train data
 df_train_clean = clean_data(df_train)
@@ -42,6 +43,10 @@ df_train_clean = clean_data(df_train)
 # clean val data
 df_valid_clean = clean_data(df_valid)
 
+# clean test data
+df_test_clean = clean_data(df_test)
+
 os.makedirs(args.output_dir, exist_ok=True)
 df_train_clean.to_json(os.path.join(args.output_dir, 'socialiq_permute_train.json'))
 df_valid_clean.to_json(os.path.join(args.output_dir, 'socialiq_permute_valid.json'))
+df_test_clean.to_json(os.path.join(args.output_dir, 'socialiq_permute_test.json'))

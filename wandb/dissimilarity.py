@@ -14,14 +14,13 @@ from tqdm import tqdm
 from torch.utils.data import DataLoader, Dataset
 from datasets import load_dataset
 
-
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 max_length = 128
 
 
 def tokenize_function(dataset):
     
-    combined = np.column_stack((dataset["i_x"],dataset["a_y"])).tolist()
+    combined = np.column_stack((dataset["a_x"],dataset["a_y"])).tolist()
     
     tokenized_input_seq_pair = tokenizer(combined,
                                          max_length=max_length,
@@ -65,7 +64,7 @@ def main():
             config=vars(args),
             tags=args._tags.split(','),
         )
-        
+    
     tokenizer = RobertaTokenizer.from_pretrained('roberta-large-mnli', cache_dir = args.cache_dir)
     
     # set up 

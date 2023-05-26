@@ -1,8 +1,8 @@
-import sys; sys.path.append('/work/yinghork/Alex_challenge/');
+import sys, os
+sys.path.append(os.path.join(os.path.dirname(sys.path[0]),'roberta'))
 import logging
 from alex_utils import *
 import wandb
-import os
 
 import argparse
 import util
@@ -50,9 +50,9 @@ def setup_args(wandb_args):
     parser.add_argument("--do_answer_only", default=False, action='store_true',
                         help="set this if we are doint the answer only task")
     
-    model_args = parser.parse_args(['--dataset_path=/work/yinghork/data/old_socialiq_data',
+    model_args = parser.parse_args(['--dataset_path=' + wandb_args.roberta_dataset_path,
                               '--dataset_name=socialiq_permute_a2',
-                              '--output_dir=/work/yinghork/results/socialiq/saliency_map_debug',
+                              '--output_dir=' + wandb_args.output_dir,
                               '--learning_rate=1e-6',
                               '--batch_size=3',
                               '--resume_from=' + wandb_args.model_path
@@ -105,6 +105,7 @@ def main():
         ('--model_path', str, ''),
         ('--dataset_path', str, ''),
         ('--output_dir', str, ''),
+        ('--roberta_dataset_path', str, ''),
     ]
     
     # TODO (optional): if there are any features of the argparse parser you want to add, initialize and pass in your parser here.
@@ -133,7 +134,7 @@ def main():
     
     
     # prepare data
-    batch_size = 32
+    batch_size = 64
 
     params = {'batch_size': batch_size,
               'shuffle': False,

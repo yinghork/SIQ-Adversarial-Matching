@@ -1,0 +1,42 @@
+program: multi_matching.py # TODO: change name of program
+method: grid
+parameters:
+  dataset_path_rel:
+      value: /work/yinghork/Alex_challenge/socialiq_data/siq2_qa_release/relevance/random # TODO: replace with the dataset path of the folder with the relevance data
+  dataset_path_sim:
+      value: /work/yinghork/Alex_challenge/socialiq_data/siq2_qa_release/similarity/random # TODO: replace with the dataset path of the folder with the similarity data
+  dataset_path_dissim:
+      value: /work/yinghork/Alex_challenge/socialiq_data/siq2_qa_release/dissimilarity/random  # TODO: replace with the dataset path of the folder with the dissimilarity data
+  all_values_dir:
+      value: /work/yinghork/Alex_challenge/socialiq_data/siq2_qa_release/all_values/random # TODO: replace with the all_values input directory 
+  output_multi_matching_dir:
+      value: /work/yinghork/Alex_challenge/socialiq_data/siq2_qa_release/multi_matchings_new/random # TODO: replace with the output directory   
+  num_matchings:
+      value: 3 # TODO: replace with the desired number of incorrect answers (number of matchings)
+  fold:
+    values:
+    - 0
+  lam:
+    values:
+    - 0.1
+    - 0.5
+    - 1.0
+    - 2.0
+  lam2:
+    values:
+    - 0.1
+    - 0.5
+    - 1.0
+    - 2.0
+  lam3:
+    values:
+    - 0.1
+    - 0.5
+    - 1.0
+    - 2.0
+  seed:
+    value: 42
+  wdb_entity:
+    value: socialiq-s2023
+  _tags:
+    value: test

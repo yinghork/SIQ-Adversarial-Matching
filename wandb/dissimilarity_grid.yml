@@ -1,10 +1,10 @@
-program: similarity.py # TODO: change name of program
+program: dissimilarity.py # TODO: change name of program
 method: grid
 parameters:
   dataset_path:
       value: /work/yinghork/Alex_challenge/socialiq_data/siq2_qa_release/folds/valid  # TODO: replace with the dataset path of the folder with the fold data 
   output_dir:
-      value: /work/yinghork/Alex_challenge/socialiq_data/siq2_qa_release/similarity/random # TODO: replace with the desired output directory  
+      value: /work/yinghork/Alex_challenge/socialiq_data/siq2_qa_release/dissimilarity/random # TODO: replace with the desired output directory  
   cache_dir:
       value: /work/yinghork
   fold:
